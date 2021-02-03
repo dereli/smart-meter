@@ -1,0 +1,32 @@
+# Editor & IDE config
+.vscode/
+*.code-*
+*.sublime-*
+
+# Logs & other temporary files
+*.cache
+*.env
+*.log
+*.todo
+tmp/
+
+# Node & NPM & Yarn
+.{npm,yarn}
+.{npm,yarn}rc
+.node_repl_history
+{npm,yarn}-{debug,error}.log*
+**/node_modules
+
+# macOS
+._*
+.DS_Store*
+Icon?
+
+# Windows
+Desktop.ini
+ehthumbs.db
+Thumbs.db
+
+# Linux
+.directory
+*~

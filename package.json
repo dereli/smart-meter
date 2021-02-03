@@ -1,0 +1,20 @@
+{
+    "name": "energy-meter",
+    "version": "0.9.0",
+    "description": "RxJS based reader & REST API for Dutch Smart Meter/P1 port",
+    "main": "index.js",
+    "scripts": {
+        "start": "node -r dotenv/config -r esm index.js"
+    },
+    "author": "Z. Dereli <dereli@gmail.com>",
+    "license": "WTFPL",
+    "dependencies": {
+        "crc": "^3.8.0",
+        "cross-env": "^7.0.3",
+        "dotenv": "^8.2.0",
+        "esm": "^3.2.25",
+        "express": "^4.17.1",
+        "lodash": "^4.17.20",
+        "rxjs": "^6.6.3"
+    }
+}
