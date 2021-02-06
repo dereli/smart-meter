@@ -15,6 +15,9 @@ const {
     INTERVAL_MOVING_AVERAGE = 1,
 } = process.env;
 
+const log = (...args) => console.log(new Date().toISOString(), ...args);
+const error = (...args) => console.error(new Date().toISOString(), ...args);
+
 const energy = new ReplaySubject(INTERVAL_MOVING_AVERAGE).pipe(
     map((telegram) => telegram.split("\r\n").slice(2, -1)),
     map((rows) =>
@@ -91,21 +94,21 @@ app.listen(PORT, HOST, () => {
         return new Socket()
             .connect(P1_PORT, P1_HOST)
             .on("data", (chunk) => processor.emit("data", chunk))
-            .on("connect", () => console.log("P1 Socket connected"))
-            .on("end", () => console.log("P1 Socket ended"))
-            .on("timeout", () => console.log("P1 Socket timed out"))
+            .on("connect", () => log("P1 Socket connected"))
+            .on("end", () => log("P1 Socket ended"))
+            .on("timeout", () => log("P1 Socket timed out"))
             .on("close", () => {
-                console.log("Connection closed, restarting.");
+                log("Connection closed, restarting.");
                 setImmediate(createReadStreamToMeter);
             })
             .on("error", (err) =>
-                console.error("P1 Socket error:", err.message)
+                error("P1 Socket error:", err.message)
             );
     }
     createReadStreamToMeter();
 
     energy.subscribe();
 
-    console.log(`Node version is ${process.version}`);
-    console.log(`Server running at http://${HOST}:${PORT}/`);
+    log(`Node version is ${process.version}`);
+    log(`Server running at http://${HOST}:${PORT}/`);
 });
