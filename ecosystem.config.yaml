@@ -1,0 +1,11 @@
+apps:
+  - name: energy-meter
+    script: ./index.js
+    node_args: '-r esm'
+    watch: true
+    env:
+      HOST: 0.0.0.0
+      PORT: 2000
+      P1_HOST: smart-meter
+      P1_PORT: 23
+      INTERVAL_MOVING_AVERAGE: 60
