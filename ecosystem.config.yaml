@@ -1,5 +1,5 @@
 apps:
-  - name: energy-meter
+  - name: smart-meter
     script: ./index.js
     node_args: '-r esm'
     watch: true

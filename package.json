@@ -1,5 +1,5 @@
 {
-    "name": "energy-meter",
+    "name": "smart-meter",
     "version": "0.9.0",
     "description": "RxJS based reader & REST API for Dutch Smart Meter/P1 port",
     "main": "index.js",
@@ -11,10 +11,10 @@
     "dependencies": {
         "crc": "^3.8.0",
         "cross-env": "^7.0.3",
-        "dotenv": "^8.2.0",
+        "dotenv": "^8.6.0",
         "esm": "^3.2.25",
         "express": "^4.17.1",
-        "lodash": "^4.17.20",
-        "rxjs": "^6.6.3"
+        "lodash": "^4.17.21",
+        "rxjs": "^6.6.7"
     }
 }

@@ -18,7 +18,7 @@ const {
 const log = (...args) => console.log(new Date().toISOString(), ...args);
 const error = (...args) => console.error(new Date().toISOString(), ...args);
 
-const energy = new ReplaySubject(INTERVAL_MOVING_AVERAGE).pipe(
+const energy = new ReplaySubject(+INTERVAL_MOVING_AVERAGE).pipe(
     map((telegram) => telegram.split("\r\n").slice(2, -1)),
     map((rows) =>
         rows
@@ -45,7 +45,7 @@ app.get("/api/gas", (req, res) => {
 
 app.get("/api/electric", (req, res) => {
     energy
-        .pipe(take(INTERVAL_MOVING_AVERAGE), toArray())
+        .pipe(take(energy.destination.destination._events.length), toArray())
         .subscribe((buffer) => {
             const [last] = buffer.slice(-1);
 
@@ -72,6 +72,7 @@ app.get("/api/electric", (req, res) => {
                 voltagePhase1: +_.meanBy(buffer, "voltage:phase-1").toFixed(2),
                 voltagePhase2: +_.meanBy(buffer, "voltage:phase-2").toFixed(2),
                 voltagePhase3: +_.meanBy(buffer, "voltage:phase-3").toFixed(2),
+                size: energy.destination.destination._events.length,
             });
         });
 });
@@ -107,7 +108,11 @@ app.listen(PORT, HOST, () => {
     }
     createReadStreamToMeter();
 
-    energy.subscribe();
+    energy.subscribe(
+        res => {},
+        err => error('Stream error:', err),
+        () => log('Stream completed.')
+    );
 
     log(`Node version is ${process.version}`);
     log(`Server running at http://${HOST}:${PORT}/`);

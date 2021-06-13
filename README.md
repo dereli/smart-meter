@@ -26,4 +26,4 @@ npm start
 
 ## Known issues
 
-- Electric endpoint hangs until the first moving average value is calculated.
+- None
